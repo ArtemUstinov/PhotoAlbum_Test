@@ -7,5 +7,5 @@
 
 struct Album: Decodable {
     let userId: Int?
-    let id: Int?
+//    let id: Int?
 }

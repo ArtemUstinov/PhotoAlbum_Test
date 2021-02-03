@@ -14,14 +14,15 @@ class UsersViewController: UIViewController {
     
     private let networkManager = NetworkManager()
     
-    private var userData: [User]?
+    private var userData = [User]()
+    
+    lazy private var errorAlertController = ErrorAlertController()
+
     
     //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Users"
-        
+                
         getData()
         setupTableView()
         setupLayouts()
@@ -29,9 +30,11 @@ class UsersViewController: UIViewController {
     
     //MARK: - Setup TableView:
     private func setupTableView() {
-        tableView.dataSource = self
+        title = "Users"
         tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(UserCell.self)
+        tableView.tableFooterView = UIView()
     }
     
     //MARK: - Get data:
@@ -41,10 +44,14 @@ class UsersViewController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.userData = data
+                self.userData = data ?? []
                 self.tableView.reloadData()
             case .failure(let error):
-                print(error.localizedDescription) //!
+                self.errorAlertController.show(with: error) {
+                    [weak self] alert in
+                    self?.present(alert, animated: true)
+                }
+                print(error.localizedDescription)
             }
         }
     }
@@ -66,23 +73,23 @@ extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
         
-        userData?.count ?? 0
+        userData.count
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: UserCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.configuraton(from: userData?[indexPath.row])
+        cell.configuraton(from: userData[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         
-        let photosVC = PhotosViewController()
-        photosVC.getData(for: userData?[indexPath.row])
+        let photosVC = PhotosViewController(with: userData[indexPath.row])
         show(photosVC, sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

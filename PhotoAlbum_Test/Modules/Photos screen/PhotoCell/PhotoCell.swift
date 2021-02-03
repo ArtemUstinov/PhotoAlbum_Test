@@ -10,8 +10,17 @@ import UIKit
 class PhotoCell: UICollectionViewCell {
     
     //MARK: - UI elements:
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .center
         label.numberOfLines = 0
         return label
     }()
@@ -27,26 +36,20 @@ class PhotoCell: UICollectionViewCell {
         return view
     }()
     
-    private var image: UIImageView = {
-        let image = UIImageView()
-        image.backgroundColor = .green
-        image.clipsToBounds = true
-        image.contentMode = .scaleToFill
-        return image
-    }()
+    private var photoImage =
+        CoverImageView(contentMode: .scaleToFill)
     
     //MARK: - Override methods:
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupLayout()
-        nameLabel.text = "HELLO!"
+        activityIndicator.startAnimating()
         
         contentView.layer.cornerRadius = 10.0
         contentView.layer.borderWidth = 0.2
         contentView.layer.borderColor = UIColor.black.cgColor
         contentView.layer.masksToBounds = true
-
+        
         layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
         layer.shadowRadius = 2.0
@@ -55,19 +58,34 @@ class PhotoCell: UICollectionViewCell {
         layer.shadowPath =
             UIBezierPath(roundedRect: contentView.bounds,
                          cornerRadius: contentView.layer.cornerRadius).cgPath
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImage.image = nil
+        nameLabel.text = nil
+    }
+    
+    //MARK: - Configuration:
+    func configuration(photo: Photo) {
+        DispatchQueue.main.async {
+            self.photoImage.fetchImage(from: photo.photo ?? "")
+            self.nameLabel.text = photo.title
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
     //MARK: - Setup Layout:
     private func setupLayout() {
         contentView.addSubview(mainView)
-        mainView.addSubview(image)
+        mainView.addSubview(photoImage)
         mainView.addSubview(titleView)
         titleView.addSubview(nameLabel)
+        mainView.addSubview(activityIndicator)
         
         // H and V: mainView lines
         contentView.addConstraintWithFormat(format: "H:|[v0]|",
@@ -77,10 +95,10 @@ class PhotoCell: UICollectionViewCell {
         
         // H and V: image lines
         mainView.addConstraintWithFormat(format: "H:|[v0]|",
-                                         views: [image])
+                                         views: [photoImage])
         mainView.addConstraintWithFormat(format: "V:|[v0][v1]|",
-                                         views: [image, titleView])
-
+                                         views: [photoImage, titleView])
+        
         // H: titleView lines
         mainView.addConstraintWithFormat(format: "H:|[v0]|",
                                          views: [titleView])
@@ -90,5 +108,17 @@ class PhotoCell: UICollectionViewCell {
                                           views: [nameLabel])
         titleView.addConstraintWithFormat(format: "V:|[v0]|",
                                           views: [nameLabel])
+        
+        // activityIndicator
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(
+                equalTo: centerXAnchor,
+                constant: 0
+            ),
+            activityIndicator.centerYAnchor.constraint(
+                equalTo: centerYAnchor,
+                constant: 0
+            )
+        ])
     }
 }

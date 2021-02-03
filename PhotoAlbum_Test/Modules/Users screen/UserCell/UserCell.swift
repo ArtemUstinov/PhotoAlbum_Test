@@ -9,8 +9,8 @@ import UIKit
 
 class UserCell: UITableViewCell {
     
-    func configuraton(from user: User?) {
-        textLabel?.text = user?.name
+    func configuraton(from user: User) {
+        textLabel?.text = user.name
     }
 
 }

@@ -7,13 +7,11 @@
 
 struct Photo: Decodable {
     let albumId: Int?
-    let id: Int?
     let title: String?
     let photo: String?
     
     enum CodingKeys: String, CodingKey {
         case albumId
-        case id
         case title
         case photo = "url"
     }

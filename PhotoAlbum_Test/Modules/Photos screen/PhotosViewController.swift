@@ -19,15 +19,31 @@ class PhotosViewController: UIViewController {
     }()
     
     private let networkManager = NetworkManager()
-    private var albumData: [Album]?
+    private var user: User?
+    private var albumData = [Album]()
+    private var photo = [Photo]()
+    
+    lazy private var errorAlertController = ErrorAlertController()
+    
+    
+    init(with user: User?) {
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getPhotos()
         setupCollectionView()
         setupLayout()
     }
+    
     
     //MARK: - Setup CollectionView:
     private func setupCollectionView() {
@@ -37,17 +53,31 @@ class PhotosViewController: UIViewController {
         collectionView.register(PhotoCell.self)
     }
     
-    //MARK: - GetData:
-    func getData(for user: User?) {
-        networkManager.fetchDataAlbum {
-            [weak self] result in
+    //MARK: - Get Data:
+    func getPhotos() {
+        networkManager.fetchDataAlbum() {
+            [weak self] dataAlbum in
             guard let self = self else { return }
-            switch result {
-            case .success(let data):
-                let data = data?.filter ({ $0.userId == user?.id })
-                self.albumData = data
-            case .failure(let error):
-                print(error.localizedDescription) //!
+            
+            let data = dataAlbum?.filter { $0.userId == self.user?.id }
+            self.albumData = data ?? []
+            self.getPhotoData()
+        }
+    }
+    
+    
+    func getPhotoData() {
+        networkManager.fetchDataPhoto() {
+            [weak self] dataPhoto in
+            guard let self = self,
+                  let dataPhoto = dataPhoto else { return }
+            
+            for photo in self.albumData {
+                self.photo =
+                    dataPhoto.filter { $0.albumId == photo.userId }
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
         }
     }
@@ -69,7 +99,7 @@ extension PhotosViewController: UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        5
+        photo.count
     }
     
     func collectionView(
@@ -79,6 +109,8 @@ extension PhotosViewController: UICollectionViewDelegate,
         
         let cell: PhotoCell =
             collectionView.dequeueReusableCell(for: indexPath)
+        
+        cell.configuration(photo: photo[indexPath.row])
         return cell
     }
 }

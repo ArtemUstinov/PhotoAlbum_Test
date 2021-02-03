@@ -19,6 +19,9 @@
 		ACB8603B25C9B433007BB94B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB8603A25C9B433007BB94B /* User.swift */; };
 		ACDFF13225CAFCFE00AF67A9 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFF13125CAFCFE00AF67A9 /* Album.swift */; };
 		ACDFF13525CAFD4B00AF67A9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFF13425CAFD4B00AF67A9 /* Photo.swift */; };
+		ACDFF13E25CB1C8A00AF67A9 /* CoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFF13D25CB1C8A00AF67A9 /* CoverImageView.swift */; };
+		ACDFF14125CB1CB400AF67A9 /* CoverImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFF14025CB1CB400AF67A9 /* CoverImageViewModel.swift */; };
+		ACDFF14725CB28C800AF67A9 /* ErrorAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFF14625CB28C800AF67A9 /* ErrorAlertController.swift */; };
 		ACE9189A25C93849002B2BCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE9189925C93849002B2BCB /* AppDelegate.swift */; };
 		ACE9189E25C93849002B2BCB /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE9189D25C93849002B2BCB /* UsersViewController.swift */; };
 		ACE918A325C9384A002B2BCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACE918A225C9384A002B2BCB /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 		ACB8603A25C9B433007BB94B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ACDFF13125CAFCFE00AF67A9 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		ACDFF13425CAFD4B00AF67A9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		ACDFF13D25CB1C8A00AF67A9 /* CoverImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageView.swift; sourceTree = "<group>"; };
+		ACDFF14025CB1CB400AF67A9 /* CoverImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverImageViewModel.swift; sourceTree = "<group>"; };
+		ACDFF14625CB28C800AF67A9 /* ErrorAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertController.swift; sourceTree = "<group>"; };
 		ACE9189625C93849002B2BCB /* PhotoAlbum_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoAlbum_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACE9189925C93849002B2BCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACE9189D25C93849002B2BCB /* UsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +143,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		ACDFF13C25CB1C7B00AF67A9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDFF13D25CB1C8A00AF67A9 /* CoverImageView.swift */,
+				ACDFF14025CB1CB400AF67A9 /* CoverImageViewModel.swift */,
+				ACDFF14625CB28C800AF67A9 /* ErrorAlertController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		ACE9188D25C93849002B2BCB = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +177,7 @@
 				ACE918A725C9384A002B2BCB /* Info.plist */,
 				ACA688B525C93CD9003AF86C /* Extensions */,
 				ACB8603325C9B202007BB94B /* Service */,
+				ACDFF13C25CB1C7B00AF67A9 /* Helpers */,
 				ACE918AF25C938CC002B2BCB /* Modules */,
 				AC5E514125C94A9500578064 /* Storyboard */,
 			);
@@ -257,6 +274,7 @@
 				ACDFF13525CAFD4B00AF67A9 /* Photo.swift in Sources */,
 				ACDFF13225CAFCFE00AF67A9 /* Album.swift in Sources */,
 				AC96AA2C25C9B9F600A99243 /* PhotosViewController.swift in Sources */,
+				ACDFF14125CB1CB400AF67A9 /* CoverImageViewModel.swift in Sources */,
 				AC5E513B25C945FB00578064 /* UITableViewCell +.swift in Sources */,
 				AC5E513825C944A300578064 /* UITableView +.swift in Sources */,
 				ACE9189E25C93849002B2BCB /* UsersViewController.swift in Sources */,
@@ -264,7 +282,9 @@
 				ACB8603725C9B237007BB94B /* NetworkManager.swift in Sources */,
 				AC96AA3325C9BFEB00A99243 /* UICollectionViewCell +.swift in Sources */,
 				ACB8603B25C9B433007BB94B /* User.swift in Sources */,
+				ACDFF14725CB28C800AF67A9 /* ErrorAlertController.swift in Sources */,
 				ACA688B825C93D3F003AF86C /* UIView +.swift in Sources */,
+				ACDFF13E25CB1C8A00AF67A9 /* CoverImageView.swift in Sources */,
 				AC96AA3025C9BF6B00A99243 /* UICollectionView +.swift in Sources */,
 				ACE9189A25C93849002B2BCB /* AppDelegate.swift in Sources */,
 				AC5E513F25C946CD00578064 /* UserCell.swift in Sources */,
@@ -336,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -391,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
