@@ -11,12 +11,18 @@ class UsersViewController: UIViewController {
     
     //MARK: - Private properties:
     private let tableView = UITableView()
-
+    
+    private let networkManager = NetworkManager()
+    
+    private var userData: [User]?
+    
     //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-                
+        
+        title = "Users"
+        
+        getData()
         setupTableView()
         setupLayouts()
     }
@@ -28,34 +34,55 @@ class UsersViewController: UIViewController {
         tableView.register(UserCell.self)
     }
     
+    //MARK: - Get data:
+    private func getData() {
+        networkManager.fetchDataUser {
+            [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.userData = data
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error.localizedDescription) //!
+            }
+        }
+    }
+    
     //MARK: - Setup Layouts:
     private func setupLayouts() {
         view.addSubview(tableView)
         
-        view.addConstraintWithFormat(format: "H:|[v0]|", views: [tableView])
-        view.addConstraintWithFormat(format: "V:|[v0]|", views: [tableView])
+        view.addConstraintWithFormat(format: "H:|[v0]|",
+                                     views: [tableView])
+        view.addConstraintWithFormat(format: "V:|[v0]|",
+                                     views: [tableView])
     }
-    
-    
 }
 
-    //MARK: - TableViewDelegate, DataSource:
+//MARK: - TableViewDelegate, DataSource:
 extension UsersViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        5
+        
+        userData?.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell: UserCell = tableView.dequeueReusableCell(for: indexPath)
-        
-        var content = cell.defaultContentConfiguration()
-        content.text = "FDAFD"
-        
-        cell.contentConfiguration = content
+        cell.configuraton(from: userData?[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        
+        let photosVC = PhotosViewController()
+        photosVC.getData(for: userData?[indexPath.row])
+        show(photosVC, sender: nil)
     }
 }
 
