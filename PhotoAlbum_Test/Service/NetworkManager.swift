@@ -94,9 +94,9 @@ class NetworkManager {
                 return
             }
             guard let data = data,
-                let response = response else {
-                    print(error?.localizedDescription ?? "Unknown error")
-                    return }
+                  let response = response else {
+                print(error?.localizedDescription ?? "Unknown error")
+                return }
             completion(data, response)
         }.resume()
     }

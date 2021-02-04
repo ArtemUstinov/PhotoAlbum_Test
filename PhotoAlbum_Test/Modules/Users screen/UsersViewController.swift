@@ -11,18 +11,14 @@ class UsersViewController: UIViewController {
     
     //MARK: - Private properties:
     private let tableView = UITableView()
-    
     private let networkManager = NetworkManager()
+    lazy private var errorAlertController = ErrorAlertController()
     
     private var userData = [User]()
-    
-    lazy private var errorAlertController = ErrorAlertController()
-
     
     //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-                
         getData()
         setupTableView()
         setupLayouts()

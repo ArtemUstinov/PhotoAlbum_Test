@@ -18,6 +18,15 @@ class PhotosViewController: UIViewController {
         return collectionView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.style = .large
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
+    //MARK: - Properties:
     private let networkManager = NetworkManager()
     private var user: User?
     private var albumData = [Album]()
@@ -25,12 +34,11 @@ class PhotosViewController: UIViewController {
     
     lazy private var errorAlertController = ErrorAlertController()
     
-    
+    //MARK: - Initializer:
     init(with user: User?) {
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -38,12 +46,16 @@ class PhotosViewController: UIViewController {
     //MARK: - Override methods:
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activityIndicator.startAnimating()
         getPhotos()
         setupCollectionView()
         setupLayout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        activityIndicator.stopAnimating()
+    }
     
     //MARK: - Setup CollectionView:
     private func setupCollectionView() {
@@ -85,11 +97,21 @@ class PhotosViewController: UIViewController {
     //MARK: - Setup layout:
     private func setupLayout() {
         view.addSubview(collectionView)
+        view.addSubview(activityIndicator)
         
         view.addConstraintWithFormat(format: "H:|[v0]|",
                                      views: [collectionView])
         view.addConstraintWithFormat(format: "V:|[v0]|",
                                      views: [collectionView])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(
+                equalTo: view.centerXAnchor, constant: 0
+            ),
+            activityIndicator.centerYAnchor.constraint(
+                equalTo: view.centerYAnchor, constant: 0
+            )
+        ])
     }
 }
 

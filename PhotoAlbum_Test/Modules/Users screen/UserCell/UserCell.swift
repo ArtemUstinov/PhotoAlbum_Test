@@ -12,5 +12,4 @@ class UserCell: UITableViewCell {
     func configuraton(from user: User) {
         textLabel?.text = user.name
     }
-
 }

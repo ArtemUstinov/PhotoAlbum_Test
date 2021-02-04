@@ -44,20 +44,7 @@ class PhotoCell: UICollectionViewCell {
         super.init(frame: frame)
         setupLayout()
         activityIndicator.startAnimating()
-        
-        contentView.layer.cornerRadius = 10.0
-        contentView.layer.borderWidth = 0.2
-        contentView.layer.borderColor = UIColor.black.cgColor
-        contentView.layer.masksToBounds = true
-        
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
-        layer.shadowRadius = 2.0
-        layer.shadowOpacity = 1.0
-        layer.masksToBounds = false
-        layer.shadowPath =
-            UIBezierPath(roundedRect: contentView.bounds,
-                         cornerRadius: contentView.layer.cornerRadius).cgPath
+        setupLayer()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,6 +64,23 @@ class PhotoCell: UICollectionViewCell {
             self.nameLabel.text = photo.title
             self.activityIndicator.stopAnimating()
         }
+    }
+    
+    //MARK: - Setup Layer:
+    private func setupLayer() {
+        contentView.layer.cornerRadius = 10.0
+        contentView.layer.borderWidth = 0.2
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.masksToBounds = true
+        
+        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+        layer.shadowRadius = 2.0
+        layer.shadowOpacity = 1.0
+        layer.masksToBounds = false
+        layer.shadowPath =
+            UIBezierPath(roundedRect: contentView.bounds,
+                         cornerRadius: contentView.layer.cornerRadius).cgPath
     }
     
     //MARK: - Setup Layout:

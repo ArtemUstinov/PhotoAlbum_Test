@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC5A593525CBE7CA00698BCE /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AC5A593425CBE7CA00698BCE /* README.md */; };
 		AC5E513825C944A300578064 /* UITableView +.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E513725C944A300578064 /* UITableView +.swift */; };
 		AC5E513B25C945FB00578064 /* UITableViewCell +.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E513A25C945FB00578064 /* UITableViewCell +.swift */; };
 		AC5E513F25C946CD00578064 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5E513E25C946CD00578064 /* UserCell.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC5A593425CBE7CA00698BCE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AC5E513725C944A300578064 /* UITableView +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView +.swift"; sourceTree = "<group>"; };
 		AC5E513A25C945FB00578064 /* UITableViewCell +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell +.swift"; sourceTree = "<group>"; };
 		AC5E513E25C946CD00578064 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -71,12 +73,12 @@
 			path = UserCell;
 			sourceTree = "<group>";
 		};
-		AC5E514125C94A9500578064 /* Storyboard */ = {
+		AC5E514125C94A9500578064 /* Launch storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				ACE918A425C9384A002B2BCB /* LaunchScreen.storyboard */,
 			);
-			path = Storyboard;
+			path = "Launch storyboard";
 			sourceTree = "<group>";
 		};
 		AC96AA2925C9B9B200A99243 /* Photos screen */ = {
@@ -179,7 +181,7 @@
 				ACB8603325C9B202007BB94B /* Service */,
 				ACDFF13C25CB1C7B00AF67A9 /* Helpers */,
 				ACE918AF25C938CC002B2BCB /* Modules */,
-				AC5E514125C94A9500578064 /* Storyboard */,
+				AC5E514125C94A9500578064 /* Launch storyboard */,
 			);
 			path = PhotoAlbum_Test;
 			sourceTree = "<group>";
@@ -187,6 +189,7 @@
 		ACE918AF25C938CC002B2BCB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				AC5A593425CBE7CA00698BCE /* README.md */,
 				ACE918B025C938D7002B2BCB /* Users screen */,
 				AC96AA2925C9B9B200A99243 /* Photos screen */,
 			);
@@ -259,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC5A593525CBE7CA00698BCE /* README.md in Resources */,
 				ACE918A625C9384A002B2BCB /* LaunchScreen.storyboard in Resources */,
 				ACE918A325C9384A002B2BCB /* Assets.xcassets in Resources */,
 			);
